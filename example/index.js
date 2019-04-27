@@ -17,6 +17,7 @@ async function startDatabase() {
 
 async function main() {
   await startDatabase();
+  return;
   await createTable();
   await populate();
   const result = await knex.select().from(my_test_table);

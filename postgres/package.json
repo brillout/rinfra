@@ -3,6 +3,7 @@
   "name": "@rinfra/postgres",
   "version": "0.0.1",
   "dependencies": {
-    "dockerode": "^2.5.8"
+    "dockerode": "^2.5.8",
+    "reassert": "^1.1.21"
   }
 }
