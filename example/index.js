@@ -1,3 +1,5 @@
+process.on('unhandledRejection', err => {throw err});
+
 //const runPostgres = require('@rinfra/postgres');
 const runPostgres = require('../postgres');
 
@@ -17,12 +19,12 @@ async function startDatabase() {
 
 async function main() {
   await startDatabase();
-  return;
   await createTable();
   await populate();
   const result = await knex.select().from(my_test_table);
   console.log(result);
   await destroyTable();
+  await closeConnection();
 }
 
 const my_test_table = 'my_test_table';
@@ -49,4 +51,8 @@ async function destroyTable() {
   await (
     knex.schema.dropTable(my_test_table)
   );
+}
+
+async function closeConnection() {
+  await knex.destroy();
 }
